@@ -1,0 +1,17 @@
+# Ignorar carpetas de Angular
+proyectoGM/node_modules/
+proyectoGM/dist/
+proyectoGM/.angular/
+
+# Ignorar archivos compilados e IDEs de Spring Boot
+proyectoGM-backend/target/
+proyectoGM-backend/.idea/
+proyectoGM-backend/.settings/
+proyectoGM-backend/.classpath/
+proyectoGM-backend/.project/
+
+# Archivos de SO e imágenes sueltas en raíz
+.DS_Store
+Thumbs.db
+*.png
+*.jpg
