@@ -1,3 +1,5 @@
+// Cabecera y navegación estilo LubriMas
+
 @use "sass:color";
 
 // -> Paleta de colores y variables <-
@@ -23,7 +25,7 @@ body {
   padding: 0;
 }
 
-// Cabecera y navegación
+// Cabecera y navegación estilo LubriMas
 
 .header {
   background-color: $color-bg;
@@ -33,28 +35,95 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.8rem 2rem;
+    gap: 1.5rem;
 
+    // 1. Logo
     .logo {
       display: flex;
       align-items: center;
-      gap: 1rem;
 
-      // Restricción para el logo de Genuine Motors
       img {
-        max-width: 100px;
+        max-width: 120px;
         height: auto;
         object-fit: contain;
       }
+    }
 
-      h1 {
-        color: $color-primary;
-        font-size: 1.5rem;
-        margin: 0;
+    // 2. Buscador Central
+    .search-bar {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      max-width: 500px;
+      position: relative;
+
+      input {
+        width: 100%;
+        padding: 0.6rem 2.8rem 0.6rem 1.2rem;
+        border: 2px solid $color-border;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: $color-primary;
+        }
+
+        &::placeholder {
+          color: $color-text-muted;
+        }
+      }
+
+      .search-btn {
+        position: absolute;
+        right: 4px;
+        background-color: $color-accent; // Rojo corporativo
+        border: none;
+        color: #ffffff;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: $color-accent-hover;
+        }
+      }
+    }
+
+    // 3. Menú de navegación derecho + Autenticación
+    .header-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      .nav-item {
+        color: $color-text;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 0.5rem;
       }
     }
   }
 
+  // Barra de Categorías en Azul
   .navbar {
     background-color: $color-primary;
 
@@ -62,14 +131,15 @@ body {
       display: flex;
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 0 1rem;
 
       li a {
         display: block;
-        padding: 0.8rem 1.5rem;
+        padding: 0.7rem 1.2rem;
         color: $color-bg;
         text-decoration: none;
         font-weight: 500;
+        font-size: 0.9rem;
         transition: background-color 0.3s ease;
 
         &:hover {
@@ -80,20 +150,138 @@ body {
   }
 }
 
-// Carrusel / Banner Principal
-
+// =========================================================
+// CARRUSEL DINÁMICO DE BANNERS (ACTUALIZADO)
+// =========================================================
 .hero-carousel {
+  position: relative;
   width: 100%;
+  max-height: 420px;
   overflow: hidden;
 
-  .carousel-container {
+  // Pista contenedora de los slides con transición fluida
+  .carousel-track {
+    display: flex;
     width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+  }
 
-    // Controla la altura del banner para que no ocupe toda la pantalla
+  .carousel-slide {
+    min-width: 100%;
+    height: 100%;
+
     img {
       width: 100%;
-      max-height: 400px;
-      object-fit: cover; // Ajusta el contenido sin deformar la imagen
+      max-height: 420px;
+      object-fit: cover; // Previene deformación de las imágenes
+      display: block;
+    }
+  }
+
+  // Botones de navegación (Flechas Izq / Der)
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(13, 71, 161, 0.7); // Azul primario con transparencia
+    color: #ffffff;
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+
+    &:hover {
+      background-color: $color-accent; // Cambia a rojo al hover
+    }
+
+    &.prev {
+      left: 15px;
+    }
+
+    &.next {
+      right: 15px;
+    }
+  }
+
+  // Puntos de navegación inferior (Indicators)
+  .carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 10;
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.active, &:hover {
+        background-color: $color-accent;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.about-video-grid {
+  display: grid;
+  // Crea 2 columnas de igual tamaño en pantallas medianas/grandes
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  align-items: center; // Alinea verticalmente texto y video
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .empresa-info {
+    h2 {
+      color: $color-primary;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: $color-accent;
+        margin-top: 0.5rem;
+        border-radius: 2px;
+      }
+    }
+
+    p {
+      color: $color-text;
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: justify;
+      margin: 0;
+    }
+  }
+
+  .empresa-video {
+    width: 100%;
+    // Mantiene la proporción 16:9 del video para que no se deforme
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
       display: block;
     }
   }
@@ -174,6 +362,127 @@ body {
       color: $color-accent;
       font-size: 1.2rem;
       font-weight: bold;
+    }
+  }
+}
+
+// Sección de Opiniones y Reseñas
+
+.reviews-section {
+  padding: 3rem 2rem;
+  background-color: #f8f9fa;
+  text-align: center;
+
+  .reviews-header {
+    margin-bottom: 2rem;
+
+    .score-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #1a1a1a;
+      display: block;
+    }
+
+    .stars-rating {
+      margin: 0.3rem 0;
+      .star {
+        color: #fbc02d; // Color amarillo dorado para estrellas
+        font-size: 1.5rem;
+        margin: 0 1px;
+      }
+    }
+
+    .score-subtitle {
+      font-size: 0.9rem;
+      color: $color-text-muted;
+      margin: 0;
+    }
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .review-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+
+      .avatar-circle {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background-color: $color-primary; // Azul corporativo
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      .user-info {
+        flex: 1;
+
+        .user-name {
+          margin: 0;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: $color-text;
+        }
+
+        .user-role {
+          font-size: 0.75rem;
+          color: $color-text-muted;
+        }
+      }
+
+      .badge-verified {
+        background-color: #2e7d32;
+        color: #ffffff;
+        font-size: 0.7rem;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+    }
+
+    .card-stars {
+      margin-bottom: 0.8rem;
+
+      .star {
+        color: #fbc02d;
+        font-size: 1rem;
+      }
+    }
+
+    .review-text {
+      font-size: 0.88rem;
+      color: #424242;
+      line-height: 1.5;
+      margin: 0;
+      font-style: italic;
     }
   }
 }
