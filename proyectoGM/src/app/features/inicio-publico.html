@@ -1,6 +1,8 @@
+<!--inicio-publico.html-->
 <!-- CABECERA (Puntos 1, 2, 3, 13) -->
 <!-- CABECERA (Estilo E-Commerce con Buscador Central) -->
 <header class="header">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <div class="header-top">
 
     <!-- 1. Logo Genuine Motors -->
@@ -47,7 +49,7 @@
 </header>
 
 <main class="container">
-  
+
   <!-- Carrusel (#4) -->
   <!-- CARRUSEL DINÁMICO DE BANNERS -->
   <section class="hero-carousel" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
@@ -82,106 +84,136 @@
   <section class="about-video-grid">
     <!-- Columna Izquierda: Texto de la empresa -->
     <article class="empresa-info">
-      <h2>La Empresa</h2>
+      <h2>¿Quiénes somos?</h2>
       <p>
-        Nosotros somos una empresa referente en el sector de repuestos automotrices, reconocida por la calidad de
-        nuestros productos, la rapidez de nuestro servicio y la confianza de nuestros clientes, creciendo de manera
-        constante y convirtiéndonos en su primera opción cuando necesiten soluciones para sus vehículos más apreciados.
-        Brindar a nuestros clientes repuestos automotrices de alta calidad, es un deber el ofrecer un servicio rápido,
-        confiable y eficiente. Además, buscamos construir relaciones duraderas basadas en la confianza, demostrando que
-        la calidad, la seguridad y la atención oportuna son nuestra primera prioridad.
+        Genuine Motors Parts es una empresa peruana dedicada a la comercialización de repuestos y accesorios
+        automotrices para diversos modelos de Hyundai y Kia con envíos a todo el Perú, enfocada en brindar alternativas
+        confiables y una atención personalizada que ayuda a cada cliente a identificar la pieza adecuada de forma rápida
+        y segura. Con el compromiso de representar calidad y confianza en el sector, nuestra misión es garantizar el
+        correcto funcionamiento y mantenimiento de cada vehículo, mientras trabajamos bajo la visión de consolidarnos
+        como una empresa referente en el mercado peruano a través del fortalecimiento de nuestra presencia física y
+        digital, facilitando la consulta y adquisición de autopartes a nivel nacional.
       </p>
     </article>
 
     <!-- Columna Derecha: Contenedor del Video -->
     <div class="empresa-video">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Video Institucional Genuine Motors" allowfullscreen>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Video Institucional Genuine Motors" loading="lazy"
+        allowfullscreen>
       </iframe>
     </div>
   </section>
 
+  <!-- Sección de Marcas Patrocinadas / Especializadas -->
+  <section class="brands-section">
+    <div class="brands-container">
+      <div class="brand-item">
+        <img src="/image/hyundai-logo.png" alt="Hyundai Logo" />
+      </div>
+      <div class="brand-divider"></div>
+      <div class="brand-item">
+        <img src="/image/kia-logo.png" alt="Kia Logo" />
+      </div>
+      <div class="brand-divider"></div>
+      <div class="brand-item">
+        <img src="/image/Alvarado.jpg" alt="Nombre de la marca">
+      </div>
+    </div>
+  </section>
+
   <!-- Productos destacados/representativos (#7) -->
-  <!-- Productos destacados/representativos -->
   <section class="productos-section">
     <div class="section-title">
       <h2>Productos Representativos</h2>
-      <div class="underline"></div>
+      <div class="controls-nav">
+        <button class="nav-btn prev-btn" aria-label="Anterior" (click)="scrollCarousel('left')">&lt;</button>
+        <button class="nav-btn next-btn" aria-label="Siguiente" (click)="scrollCarousel('right')">&gt;</button>
+      </div>
     </div>
 
-    <div class="product-grid">
+    <div #carouselWrapper class="product-carousel-wrapper">
+      <div class="product-grid">
 
-      <!-- Producto 1 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/AceiteMotor-Castrol.jpg" alt="Aceite Castrol">
+        <!-- Producto 1 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/BobinaEncendido-hyundai120.jpg" alt="Bobina de encendido">
+          </div>
+          <div class="card-body">
+            <span class="brand">HYUNDAI</span>
+            <h3 class="product-title">Bobina de encendido</h3>
+            <p class="price">S/ 120.00 u.</p>
+          </div>
         </div>
-        <div class="card-body">
-          <span class="brand">CASTROL</span>
-          <h3 class="product-title">Aceite Castrol Magnatec 5W-30</h3>
-          <p class="price">S/ 165.00</p>
+
+        <!-- Producto 2 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/Bujia.jpg" alt="Bujía de iridio">
+          </div>
+          <div class="card-body">
+            <span class="brand">KIA</span>
+            <h3 class="product-title">Bujía de iridio NGK</h3>
+            <p class="price">S/ 65.00 4 u.</p>
+          </div>
         </div>
+
+        <!-- Producto 3 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/AceiteHyundai10w30.jpg" alt="Aceite Hyundai">
+          </div>
+          <div class="card-body">
+            <span class="brand">HYUNDAI</span>
+            <h3 class="product-title">Aceite Hyundai SP 10W-30</h3>
+            <p class="price">S/ 70.00</p>
+          </div>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/SoporteHidraulico.jpg" alt="Soporte de motor">
+          </div>
+          <div class="card-body">
+            <span class="brand">Hyundai</span>
+            <h3 class="product-title">Soporte de motor hidráulico I25/I35</h3>
+            <p class="price">S/ 200.00</p>
+          </div>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/SoporteInferior180.jpg" alt="Soporte de motor">
+          </div>
+          <div class="card-body">
+            <span class="brand">HYUNDAI</span>
+            <h3 class="product-title">Soporte motor central inferior 1.6 G4fc</h3>
+            <p class="price">S/ 180.00</p>
+          </div>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="product-card">
+          <div class="img-container">
+            <img src="image/FiltroAceite1KIA.jpg" alt="Filtro de Aceite">
+          </div>
+          <div class="card-body">
+            <span class="brand">HYUNDAI-Mann</span>
+            <h3 class="product-title">Filtro de aceite Tucson</h3>
+            <p class="price">S/ 25.00</p>
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <!-- Producto 2 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/AceiteMotor-Mitsubishi.webp" alt="Aceite Mitsubishi">
-        </div>
-        <div class="card-body">
-          <span class="brand">MITSUBISHI</span>
-          <h3 class="product-title">Aceite Mitsubishi Molygen 5W30</h3>
-          <p class="price">S/ 60.00</p>
-        </div>
-      </div>
-
-      <!-- Producto 3 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/AceiteMotor-Valvoline.webp" alt="Aceite Valvoline">
-        </div>
-        <div class="card-body">
-          <span class="brand">VALVOLINE</span>
-          <h3 class="product-title">Aceite Valvoline 10W-30</h3>
-          <p class="price">S/ 250.00</p>
-        </div>
-      </div>
-
-      <!-- Producto 4 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/Bujia-NGK-SparkPlugs.jpg" alt="Bujía NGK">
-        </div>
-        <div class="card-body">
-          <span class="brand">NGK</span>
-          <h3 class="product-title">Bujía NGK Spark Plugs</h3>
-          <p class="price">S/ 45.00</p>
-        </div>
-      </div>
-
-      <!-- Producto 5 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/Filtro de aceite Hyundai-Mobis.jpg" alt="Filtro de Aceite">
-        </div>
-        <div class="card-body">
-          <span class="brand">HYUNDAI MOBIS</span>
-          <h3 class="product-title">Filtro de Aceite Hyundai Original</h3>
-          <p class="price">S/ 35.00</p>
-        </div>
-      </div>
-
-      <!-- Producto 6 -->
-      <div class="product-card">
-        <div class="img-container">
-          <img src="image/FiltroDeAire-STP.jpg" alt="Filtro de Aire">
-        </div>
-        <div class="card-body">
-          <span class="brand">STP</span>
-          <h3 class="product-title">Filtro de Aire Premium STP</h3>
-          <p class="price">S/ 55.00</p>
-        </div>
-      </div>
-
+    <!-- Puntos indicadores inferiores -->
+    <div class="carousel-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
   </section>
 
@@ -234,19 +266,24 @@
   </section>
 </main>
 
+
 <!-- FOOTER (Puntos 10, 11, 12) -->
 <footer class="footer">
-  <div class="social-links"> <!-- Punto 10 -->
-    <a href="#"><i class="icon-facebook"></i></a>
-    <a href="#"><i class="icon-instagram"></i></a>
+  <!-- 10. Redes sociales (Izquierda) -->
+  <div class="footer-section social-links">
+    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    <a href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+    <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
   </div>
 
-  <div class="utp-logo"> <!-- Punto 11 -->
-    <img src="assets/img/logo-utp.png" alt="Logo UTP">
+  <!-- 11. Logo de la universidad UTP (Centro) -->
+  <div class="footer-section utp-logo">
+    <img src="image/utp-logo.webp" alt="Logo Universidad Tecnológica del Perú">
   </div>
 
-  <div class="contacto-trabajador"> <!-- Punto 12 -->
-    <p><strong>Contacto:</strong> Equipo Genuine Motors</p>
-    <p>genuinemotors@hotmail.com</p>
+  <!-- 12. Contacto (Derecha) -->
+  <div class="footer-section contact-info">
+    <p class="contact-title">Contacto: Roy Import Company EIRL.</p>
+    <a href="mailto:corporacionroy@outlook.com">corporacionroy@outlook.com</a>
   </div>
 </footer>

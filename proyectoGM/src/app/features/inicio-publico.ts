@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+//inicio-publico.ts
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Interfaces
@@ -25,6 +26,9 @@ interface BannerSlide {
   styleUrl: './inicio-publico.scss'
 })
 export class InicioPublicoComponent implements OnInit, OnDestroy {
+
+  // Referencia al contenedor scrollable de productos
+  @ViewChild('carouselWrapper') carouselWrapper!: ElementRef;
 
   // --- 1. LÓGICA DEL CARRUSEL DINÁMICO ---
   slides: BannerSlide[] = [
@@ -80,7 +84,20 @@ export class InicioPublicoComponent implements OnInit, OnDestroy {
     this.currentIndex = index;
   }
 
-  // --- 2. DATA DE RESEÑAS / TESTIMONIOS ---
+  // --- 2. LÓGICA DEL CARRUSEL DE PRODUCTOS ---
+  scrollCarousel(direction: 'left' | 'right'): void {
+    if (this.carouselWrapper) {
+      const container = this.carouselWrapper.nativeElement;
+      const scrollAmount = 220 * 2; // Desplaza el ancho aproximado de 2 tarjetas
+
+      container.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // --- 3. DATA DE RESEÑAS / TESTIMONIOS ---
   resenas: Resena[] = [
     {
       autor: 'Taller AutoFix La Victoria',
