@@ -1,0 +1,228 @@
+<div class="shell">
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <img src="image/GenuineMotors_Logo.jpg" alt="Genuine Motors" class="logo">
+
+        <nav class="sb-nav">
+            <a class="sb-item activo" title="Productos">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                        d="M12 2 3 7v10l9 5 9-5V7l-9-5Zm0 2.2 6.4 3.5L12 11.2 5.6 7.7 12 4.2ZM5 9.4l6 3.3v6.6l-6-3.3V9.4Zm8 9.9v-6.6l6-3.3v6.6l-6 3.3Z" />
+                </svg>
+            </a>
+            <a class="sb-item" routerLink="/" title="Ir al inicio">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z" />
+                </svg>
+            </a>
+        </nav>
+
+        <button class="sb-item sb-salir" type="button" (click)="cerrarSesion()" title="Cerrar sesión">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 3H4v18h6v-2H6V5h4V3Zm5.6 4.6L14.2 9l2 2H9v2h7.2l-2 2 1.4 1.4L20 12l-4.4-4.4Z" />
+            </svg>
+        </button>
+    </aside>
+
+    <main class="contenido">
+        <section class="panel">
+            <!-- Barra superior: título, búsqueda, filtro, botón nuevo -->
+            <header class="barra">
+                <h1>Productos</h1>
+
+                <label class="buscador">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M10 4a6 6 0 1 0 3.5 10.9l4.8 4.8 1.4-1.4-4.8-4.8A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z" />
+                    </svg>
+                    <input type="text" name="buscar" placeholder="Buscar" [ngModel]="textoBusqueda"
+                        (ngModelChange)="onTexto($event)">
+                </label>
+
+                <select class="select" name="marca" [(ngModel)]="marcaSel" aria-label="Filtrar por marca">
+                    <option value="">Marca</option>
+                    <option *ngFor="let m of marcas" [value]="m">{{ m }}</option>
+                </select>
+
+                <button class="btn btn-sec" type="button" (click)="aplicarMarca()">Buscar</button>
+
+                <button class="btn btn-primario" type="button" (click)="abrirCrear()">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z" />
+                    </svg>
+                    Nuevo producto
+                </button>
+            </header>
+
+            <!-- Chips de filtros activos -->
+            <div class="filtros" *ngIf="textoBusqueda || marcaAplicada">
+                <span class="lbl">Filtrar por:</span>
+                <span class="chip" *ngIf="textoBusqueda">
+                    "{{ textoBusqueda }}"
+                    <button type="button" (click)="quitarTexto()" aria-label="Quitar búsqueda">&times;</button>
+                </span>
+                <span class="chip" *ngIf="marcaAplicada">
+                    {{ marcaAplicada }}
+                    <button type="button" (click)="quitarMarca()" aria-label="Quitar marca">&times;</button>
+                </span>
+                <a class="limpiar" (click)="limpiar()">Limpiar</a>
+            </div>
+
+            <!-- Tabla -->
+            <div class="tabla-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Vencimiento</th>
+                            <th class="col-acc">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of paginados; trackBy: trackById">
+                            <td>
+                                <div class="thumb">
+                                    <img *ngIf="p.imagen && !imagenesFallidas[p.id]" [src]="p.imagen" [alt]="p.nombre"
+                                        (error)="imagenesFallidas[p.id] = true">
+                                    <span *ngIf="!p.imagen || imagenesFallidas[p.id]">{{ p.nombre.charAt(0) }}</span>
+                                </div>
+                            </td>
+                            <td class="nombre">{{ p.nombre }}</td>
+                            <td>{{ p.marca }}</td>
+                            <td>{{ p.precio | currency:'PEN':'S/ ':'1.2-2' }}</td>
+                            <td>{{ p.fechaVencimiento ? (p.fechaVencimiento | date:'dd/MM/yyyy') : '—' }}</td>
+                            <td class="col-acc">
+                                <button type="button" class="icono" title="Ver" (click)="abrirVer(p)">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7Zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="icono" title="Editar" (click)="abrirEditar(p)">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="m3 17.3V21h3.7l10.9-10.9-3.7-3.7L3 17.3Zm17.7-10.1a1 1 0 0 0 0-1.4l-2.5-2.5a1 1 0 0 0-1.4 0l-1.9 1.9 3.7 3.7 2.1-1.7Z" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="icono peligro" title="Eliminar" (click)="pedirEliminar(p)">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12ZM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4Z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="paginados.length === 0">
+                            <td colspan="6" class="vacio">No se encontraron productos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <footer class="pie">
+                <div class="filas">
+                    <label for="filas">Filas por página</label>
+                    <select id="filas" class="select" [ngModel]="filasPorPagina" (ngModelChange)="cambiarFilas($event)">
+                        <option *ngFor="let n of opcionesFilas" [value]="n">{{ n }}</option>
+                    </select>
+                </div>
+
+                <nav class="paginas" aria-label="Paginación">
+                    <button type="button" class="pag-btn" (click)="irPagina(pagina - 1)"
+                        [disabled]="pagina === 1">&lsaquo; Anterior</button>
+                    <ng-container *ngFor="let n of paginasVisibles">
+                        <button *ngIf="n !== 0" type="button" class="pag-num" [class.activa]="n === pagina"
+                            (click)="irPagina(n)">{{ n }}</button>
+                        <span *ngIf="n === 0" class="puntos">…</span>
+                    </ng-container>
+                    <button type="button" class="pag-btn" (click)="irPagina(pagina + 1)"
+                        [disabled]="pagina === totalPaginas">Siguiente &rsaquo;</button>
+                </nav>
+
+                <div class="resumen">Mostrando {{ desde }}-{{ hasta }} de {{ filtrados.length }} registros</div>
+            </footer>
+        </section>
+    </main>
+</div>
+
+<!-- Modal crear / editar / ver -->
+<div class="overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
+    <div class="modal" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+        <h2>{{ tituloModal }}</h2>
+
+        <form #f="ngForm" (ngSubmit)="guardar(f)" novalidate>
+            <label class="campo">
+                <span>Nombre</span>
+                <input type="text" name="nombre" [(ngModel)]="form.nombre" #nombre="ngModel" required maxlength="80"
+                    [disabled]="modo === 'ver'">
+                <small class="msg" *ngIf="nombre.invalid && (nombre.touched || f.submitted)">El nombre es
+                    obligatorio.</small>
+            </label>
+
+            <label class="campo">
+                <span>Descripción</span>
+                <textarea name="descripcion" rows="3" [(ngModel)]="form.descripcion" #desc="ngModel" required
+                    [disabled]="modo === 'ver'"></textarea>
+                <small class="msg" *ngIf="desc.invalid && (desc.touched || f.submitted)">La descripción es
+                    obligatoria.</small>
+            </label>
+
+            <div class="fila-2">
+                <label class="campo">
+                    <span>Marca</span>
+                    <input type="text" name="marca" list="lista-marcas" [(ngModel)]="form.marca" #marca="ngModel"
+                        required [disabled]="modo === 'ver'">
+                    <datalist id="lista-marcas">
+                        <option *ngFor="let m of marcas" [value]="m"></option>
+                    </datalist>
+                    <small class="msg" *ngIf="marca.invalid && (marca.touched || f.submitted)">La marca es
+                        obligatoria.</small>
+                </label>
+
+                <label class="campo">
+                    <span>Precio (S/)</span>
+                    <input type="number" name="precio" min="0" step="0.01" [(ngModel)]="form.precio" #precio="ngModel"
+                        required [disabled]="modo === 'ver'">
+                    <small class="msg" *ngIf="precio.invalid && (precio.touched || f.submitted)">Ingresa un precio
+                        válido (0 o más).</small>
+                </label>
+            </div>
+
+            <label class="campo">
+                <span>Fecha de vencimiento <em>(solo si el producto lo requiere)</em></span>
+                <input type="date" name="fechaVencimiento" [(ngModel)]="form.fechaVencimiento"
+                    [disabled]="modo === 'ver'">
+            </label>
+
+            <label class="campo">
+                <span>Imagen (URL o ruta, ej.: assets/productos/filtro.png)</span>
+                <input type="text" name="imagen" [(ngModel)]="form.imagen" [disabled]="modo === 'ver'">
+            </label>
+
+            <div class="modal-acc">
+                <button type="button" class="btn btn-sec" (click)="cerrarModal()">{{ modo === 'ver' ? 'Cerrar' :
+                    'Cancelar' }}</button>
+                <button *ngIf="modo !== 'ver'" type="submit" class="btn btn-primario">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Confirmar eliminación -->
+<div class="overlay" *ngIf="porEliminar" (click)="cancelarEliminar()">
+    <div class="modal modal-chico" (click)="$event.stopPropagation()" role="alertdialog" aria-modal="true">
+        <h2>Eliminar producto</h2>
+        <p>¿Seguro que deseas eliminar <strong>{{ porEliminar.nombre }}</strong>? Esta acción no se puede deshacer.</p>
+        <div class="modal-acc">
+            <button type="button" class="btn btn-sec" (click)="cancelarEliminar()">Cancelar</button>
+            <button type="button" class="btn btn-primario" (click)="confirmarEliminar()">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Aviso -->
+<div class="toast" *ngIf="mensaje" role="status">{{ mensaje }}</div>

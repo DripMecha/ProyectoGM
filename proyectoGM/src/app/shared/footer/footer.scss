@@ -1,0 +1,86 @@
+$color-bg: #ffffff;
+$color-primary-deep: #071B3E;
+$color-accent: #D8232A;
+
+.footer {
+  background-color: $color-primary-deep;
+  color: $color-bg;
+  padding: 1.7rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+
+  .footer-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    &.social-links {
+      justify-content: flex-start;
+      gap: 0.7rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+        font-size: 1.05rem;
+        transition: all 0.25s ease;
+
+        &:hover {
+          background-color: $color-accent;
+          border-color: $color-accent;
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    &.utp-logo {
+      justify-content: center;
+
+      img {
+        max-height: 40px;
+        width: auto;
+        object-fit: contain;
+        background-color: #ffffff;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+    }
+
+    &.contact-info {
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+
+      .contact-title {
+        margin: 0 0 0.2rem 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #DCE5F7;
+      }
+      .contact-direccion {
+        margin: 0 0 0.2rem 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #DCE5F7;
+      }
+
+      a {
+        color: #B9C7E8;
+        font-size: 0.85rem;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          color: $color-accent;
+        }
+      }
+    }
+  }
+}

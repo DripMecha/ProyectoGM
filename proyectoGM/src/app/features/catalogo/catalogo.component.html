@@ -1,0 +1,138 @@
+<app-header />
+
+<!-- Banner con migas de pan -->
+<section class="banner">
+  <h1>Catálogo de productos</h1>
+  <nav class="migas" aria-label="Ruta">
+    <a routerLink="/">Inicio</a>
+    <span>&rsaquo;</span>
+    <span>Catálogo</span>
+  </nav>
+</section>
+
+<main class="catalogo">
+  <!-- ========== Filtros laterales ========== -->
+  <aside class="filtros" [class.abierto]="filtrosAbiertos()">
+    <div class="bloque">
+      <h2>Marcas</h2>
+      @for (m of marcas(); track m.nombre) {
+        <label class="check">
+          <input type="checkbox" [checked]="marcasSel().includes(m.nombre)"
+                 (change)="toggleMarca(m.nombre, $any($event.target).checked)">
+          <span>{{ m.nombre }}</span>
+          <small>({{ m.cantidad }})</small>
+        </label>
+      }
+    </div>
+
+    <div class="bloque">
+      <h2>Filtro de precios</h2>
+      <label class="rango">
+        <span>Desde</span>
+        <input type="range" [min]="limites().min" [max]="limites().max" step="1"
+               [ngModel]="precioDesde()" (ngModelChange)="onDesde($event)">
+      </label>
+      <label class="rango">
+        <span>Hasta</span>
+        <input type="range" [min]="limites().min" [max]="limites().max" step="1"
+               [ngModel]="precioHasta()" (ngModelChange)="onHasta($event)">
+      </label>
+      <p class="precio-texto">
+        Precio: {{ precioDesde() | currency:'PEN':'S/ ':'1.0-0' }} &mdash; {{ precioHasta() | currency:'PEN':'S/ ':'1.0-0' }}
+      </p>
+    </div>
+
+    @if (hayFiltros()) {
+      <button type="button" class="btn-limpiar" (click)="limpiar()">Limpiar filtros</button>
+    }
+  </aside>
+
+  <!-- ========== Resultados ========== -->
+  <section class="resultados">
+    <div class="barra">
+      <button type="button" class="btn-filtros" (click)="filtrosAbiertos.set(!filtrosAbiertos())">
+        {{ filtrosAbiertos() ? 'Ocultar filtros' : 'Filtros' }}
+      </button>
+
+      <label class="buscador">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4a6 6 0 1 0 3.5 10.9l4.8 4.8 1.4-1.4-4.8-4.8A6 6 0 0 0 10 4Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+        <input type="text" placeholder="Buscar producto, marca..."
+               [ngModel]="texto()" (ngModelChange)="onTexto($event)">
+      </label>
+
+      <select class="select" aria-label="Ordenar por" [ngModel]="orden()" (ngModelChange)="cambiarOrden($event)">
+        <option value="relevancia">Ordenar por defecto</option>
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+        <option value="nombre">Nombre: A-Z</option>
+      </select>
+
+      <div class="vista" role="group" aria-label="Tipo de vista">
+        <button type="button" title="Cuadrícula" [class.activa]="vista() === 'cuadricula'" (click)="vista.set('cuadricula')">
+          <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z"/></svg>
+        </button>
+        <button type="button" title="Lista" [class.activa]="vista() === 'lista'" (click)="vista.set('lista')">
+          <svg viewBox="0 0 24 24"><path d="M3 5h4v4H3V5Zm6 1h12v2H9V6ZM3 11h4v4H3v-4Zm6 1h12v2H9v-2ZM3 17h4v4H3v-4Zm6 1h12v2H9v-2Z"/></svg>
+        </button>
+      </div>
+
+      <label class="mostrar">
+        <span>Mostrar</span>
+        <select class="select" [ngModel]="porPagina()" (ngModelChange)="cambiarPorPagina($event)">
+          @for (n of opcionesPorPagina; track n) {
+            <option [ngValue]="n">{{ n }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <p class="resumen">
+      Mostrando {{ desde() }}-{{ hasta() }} de {{ filtrados().length }} productos
+    </p>
+
+    <div class="productos" [class.lista]="vista() === 'lista'">
+      @for (p of paginados(); track p.id) {
+        <article class="tarjeta">
+          <div class="foto">
+            @if (tieneImagen(p)) {
+              <img [src]="p.imagen" [alt]="p.nombre" loading="lazy" (error)="imagenFallida(p.id)">
+            } @else {
+              <span class="inicial">{{ p.nombre.charAt(0) }}</span>
+            }
+          </div>
+          <div class="info">
+            <span class="marca">{{ p.marca }}</span>
+            <h3>{{ p.nombre }}</h3>
+            <p class="descripcion">{{ p.descripcion }}</p>
+            @if (p.fechaVencimiento) {
+              <p class="vence">Vence: {{ p.fechaVencimiento | date:'dd/MM/yyyy' }}</p>
+            }
+            <p class="precio">{{ p.precio | currency:'PEN':'S/ ':'1.2-2' }}</p>
+          </div>
+        </article>
+      } @empty {
+        <div class="vacio">
+          <p>No se encontraron productos con esos filtros.</p>
+          <button type="button" class="btn-limpiar" (click)="limpiar()">Limpiar filtros</button>
+        </div>
+      }
+    </div>
+
+    <!-- Paginación -->
+    @if (totalPaginas() > 1) {
+      <nav class="paginas" aria-label="Paginación">
+        <button type="button" (click)="irPagina(paginaActual() - 1)" [disabled]="paginaActual() === 1">&lsaquo; Anterior</button>
+        @for (n of paginasVisibles(); track $index) {
+          @if (n === 0) {
+            <span class="puntos">…</span>
+          } @else {
+            <button type="button" class="num" [class.activa]="n === paginaActual()" (click)="irPagina(n)">{{ n }}</button>
+          }
+        }
+        <button type="button" (click)="irPagina(paginaActual() + 1)" [disabled]="paginaActual() === totalPaginas()">Siguiente &rsaquo;</button>
+      </nav>
+    }
+  </section>
+</main>
+
+<app-footer />

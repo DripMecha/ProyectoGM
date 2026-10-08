@@ -1,0 +1,157 @@
+$azul: #1f3a8a;
+$azul-oscuro: #0b1f4d;
+$rojo: #c8102e;
+$rojo-hover: #a50d26;
+$gris: #5b6478;
+$borde: #d5dae6;
+
+.login-fondo {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 25%, rgba(200, 16, 46, .35), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(31, 58, 138, .6), transparent 45%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, .035) 0 2px, transparent 2px 14px),
+        linear-gradient(160deg, $azul-oscuro, #12307a);
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .35);
+
+    h2 {
+        margin: .75rem 0 .25rem;
+        color: $azul-oscuro;
+        font-size: 1.6rem;
+    }
+
+    .sub {
+        margin: 0 0 1.5rem;
+        color: $gris;
+    }
+}
+
+.logo-card {
+    display: block;
+    height: 64px;
+    margin: 0 auto 1rem;
+}
+
+.volver {
+    color: $azul;
+    font-size: .9rem;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.campo {
+    display: block;
+    margin-bottom: 1.1rem;
+
+    >span {
+        display: block;
+        margin-bottom: .35rem;
+        font-size: .9rem;
+        font-weight: 600;
+        color: $azul-oscuro;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: .7rem .85rem;
+        border: 1px solid $borde;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: #fff;
+
+        &:focus {
+            outline: 2px solid rgba($azul, .35);
+            border-color: $azul;
+        }
+
+        &.ng-invalid.ng-touched {
+            border-color: $rojo;
+        }
+    }
+}
+
+.con-boton {
+    position: relative;
+
+    input {
+        padding-right: 4.2rem;
+    }
+}
+
+.ojo {
+    position: absolute;
+    right: .4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: $azul;
+    font-weight: 600;
+    cursor: pointer;
+    padding: .4rem .5rem;
+}
+
+.msg {
+    display: block;
+    margin-top: .3rem;
+    color: $rojo;
+    font-size: .82rem;
+}
+
+.error {
+    margin-bottom: 1rem;
+    padding: .7rem .85rem;
+    border-radius: 8px;
+    background: #fdecee;
+    color: $rojo-hover;
+    border: 1px solid #f5b8c1;
+    font-size: .92rem;
+}
+
+.btn {
+    width: 100%;
+    padding: .85rem;
+    border: 0;
+    border-radius: 8px;
+    background: $rojo;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s;
+
+    &:hover:not(:disabled) {
+        background: $rojo-hover;
+    }
+
+    &:disabled {
+        opacity: .7;
+        cursor: wait;
+    }
+}
+
+.demo {
+    margin: 1.25rem 0 0;
+    padding: .75rem;
+    border-radius: 8px;
+    background: #eef2fb;
+    color: $gris;
+    font-size: .8rem;
+    line-height: 1.6;
+}
