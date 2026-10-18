@@ -1,9 +1,11 @@
 //inicio-publico.ts
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
+import { ProductoService } from '../../core/services/producto.service';
+import { Producto } from '../../core/models/producto';
 import { Footer } from '../../shared/footer/footer';
 
 // Interfaces
@@ -54,9 +56,18 @@ export class InicioPublicoComponent implements OnInit, OnDestroy {
   ];
 
   auth = inject(AuthService);
+  private router = inject(Router);
+  private productoService = inject(ProductoService);
+
+  destacados: Producto[] = [];
 
   cerrarSesion(): void {
     this.auth.logout();
+  }
+
+  buscar(texto: string): void {
+    const q = texto.trim();
+    this.router.navigate(['/catalogo'], { queryParams: q ? { q } : {} });
   }
 
   currentIndex: number = 0;
@@ -64,6 +75,9 @@ export class InicioPublicoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startAutoSlide();
+    this.productoService.listar().subscribe(lista => {
+      this.destacados = lista.filter(p => p.imagen).slice(0, 10);
+    });
   }
 
   ngOnDestroy(): void {
