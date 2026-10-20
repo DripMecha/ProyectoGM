@@ -430,7 +430,21 @@ h4 {
 
     .controls-nav {
       display: flex;
+      align-items: center;
       gap: 0.5rem;
+
+      .ver-todo {
+        margin-right: 0.6rem;
+        color: $color-accent;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+
+        &:hover {
+          color: $color-accent-hover;
+          text-decoration: underline;
+        }
+      }
 
       .nav-btn {
         background: #ffffff;
@@ -471,6 +485,8 @@ h4 {
 
   .product-card {
     flex: 0 0 200px;
+    text-decoration: none;
+    color: inherit;
     background-color: #ffffff;
     border: 1px solid $color-border;
     border-radius: 12px;
