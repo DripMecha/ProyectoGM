@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Producto } from '../../core/models/producto';
 import { ProductoService } from '../../core/services/producto.service';
 import { Header } from '../../shared/header/header';
@@ -18,6 +18,7 @@ type Vista = 'cuadricula' | 'lista';
 })
 export class CatalogoComponent implements OnInit {
   private svc = inject(ProductoService);
+  private route = inject(ActivatedRoute);
 
   // ---------- Estado (signals) ----------
   productos = signal<Producto[]>([]);
@@ -124,6 +125,12 @@ export class CatalogoComponent implements OnInit {
       this.productos.set(lista);
       this.precioDesde.set(this.limites().min);
       this.precioHasta.set(this.limites().max);
+    });
+
+    // Búsqueda que llega desde el inicio: /catalogo?q=texto
+    this.route.queryParamMap.subscribe(params => {
+      this.texto.set(params.get('q') ?? '');
+      this.pagina.set(1);
     });
   }
 
