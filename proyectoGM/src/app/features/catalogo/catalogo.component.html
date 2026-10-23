@@ -1,5 +1,8 @@
 <app-header />
 
+<!-- NUEVO CAMBIO PARA HACER EN EL FRONT - PRUEBA DEL PULL REQUEST -->
+
+
 <!-- Banner con migas de pan -->
 <section class="banner">
   <h1>Catálogo de productos</h1>
@@ -49,6 +52,9 @@
 
   <!-- ========== Resultados ========== -->
   <section class="resultados">
+    @if (!cargando() && origen() === 'ejemplo') {
+      <p class="aviso-origen">No se pudo conectar con la base de datos. Se muestran productos de ejemplo.</p>
+    }
     <div class="barra">
       <button type="button" class="btn-filtros" (click)="filtrosAbiertos.set(!filtrosAbiertos())">
         {{ filtrosAbiertos() ? 'Ocultar filtros' : 'Filtros' }}

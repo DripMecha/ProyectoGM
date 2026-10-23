@@ -428,3 +428,13 @@ svg {
         width: 120px;
     }
 }
+
+/* ---------- Aviso: sin conexión a la BD ---------- */
+.aviso-origen {
+    margin: 0 0 12px;
+    padding: 10px 14px;
+    border-left: 4px solid $rojo;
+    background: #fff4f4;
+    color: $gris;
+    font-size: 14px;
+}
