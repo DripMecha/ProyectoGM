@@ -3,7 +3,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Producto } from '../../core/models/producto';
-import { ProductoService } from '../../core/services/producto.service';
+import { CatalogoService, Origen } from '../../core/services/catalogo.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
 
@@ -17,11 +17,13 @@ type Vista = 'cuadricula' | 'lista';
   styleUrl: './catalogo.component.scss',
 })
 export class CatalogoComponent implements OnInit {
-  private svc = inject(ProductoService);
+  private svc = inject(CatalogoService);
   private route = inject(ActivatedRoute);
 
   // ---------- Estado (signals) ----------
   productos = signal<Producto[]>([]);
+  cargando = signal(true);
+  origen = signal<Origen>('bd');      // 'ejemplo' si la BD no respondió
   texto = signal('');                 // búsqueda DINÁMICA (mientras se escribe)
   marcasSel = signal<string[]>([]);   // filtro por marcas (casillas)
   precioDesde = signal(0);
@@ -120,9 +122,11 @@ export class CatalogoComponent implements OnInit {
 
   // ---------- Ciclo de vida ----------
   ngOnInit(): void {
-    // Mismo servicio que usa el CRUD: lo que el administrador registre aparece aquí.
-    this.svc.listar().subscribe(lista => {
-      this.productos.set(lista);
+    // Productos de la BD (GET /api/productos); si falla, datos de ejemplo.
+    this.svc.listar().subscribe(({ productos, origen }) => {
+      this.productos.set(productos);
+      this.origen.set(origen);
+      this.cargando.set(false);
       this.precioDesde.set(this.limites().min);
       this.precioHasta.set(this.limites().max);
     });
