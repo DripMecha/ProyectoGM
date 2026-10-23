@@ -250,18 +250,28 @@ svg {
 }
 
 .foto {
-    height: 190px;
-    background: $fondo;
+    position: relative;
+    height: 200px;
+    background: #fff;
+    border-bottom: 1px solid $borde;
     display: grid;
     place-items: center;
     overflow: hidden;
 
     img {
-        width: 100%;
-        height: 100%;
+        position: absolute;
+        inset: 1.1rem;
+        width: calc(100% - 2.2rem);
+        height: calc(100% - 2.2rem);
         object-fit: contain;
-        background: #fff;
+        // Funde el fondo gris claro de algunas fotos con el blanco de la tarjeta
+        mix-blend-mode: multiply;
+        transition: transform .25s;
     }
+}
+
+.tarjeta:hover .foto img {
+    transform: scale(1.04);
 }
 
 .inicial {

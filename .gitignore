@@ -13,5 +13,5 @@ proyectoGM-backend/.project/
 # Archivos de SO e imágenes sueltas en raíz
 .DS_Store
 Thumbs.db
-*.png
-*.jpg
+/*.png
+/*.jpg
