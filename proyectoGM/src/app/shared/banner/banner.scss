@@ -1,0 +1,36 @@
+$azul: #0b2a5b;
+$azul-oscuro: #071b3e;
+$rojo: #d8232a;
+
+.banner {
+  background: linear-gradient(135deg, $azul-oscuro, $azul);
+  color: #ffffff;
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  border-bottom: 4px solid $rojo;
+
+  h1 {
+    margin: 0;
+    font-size: 1.6rem;
+  }
+}
+
+.migas {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #c9d4ee;
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

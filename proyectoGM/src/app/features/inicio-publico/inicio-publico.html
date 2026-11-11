@@ -23,7 +23,7 @@
 
     <!-- 3. Menú de Enlaces + Iniciar Sesión / Registro -->
     <nav class="header-nav-right">
-      <a href="#nosotros" class="nav-item">Sobre nosotros</a>
+      <a routerLink="/nosotros" class="nav-item">Sobre nosotros</a>
       <a routerLink="/catalogo" class="nav-item">Nuestro Catálogo</a>
 
       <div class="auth-buttons">
@@ -49,6 +49,9 @@
       <li><a routerLink="/catalogo" [queryParams]="{ q: 'filtro' }">Filtros</a></li>
       <li><a routerLink="/catalogo" [queryParams]="{ q: 'embrague' }">Kits de Embrague</a></li>
       <li><a routerLink="/catalogo" [queryParams]="{ q: 'amortiguador' }">Suspensión</a></li>
+      <li><a routerLink="/desarrolladores">Desarrolladores</a></li>
+      <li><a routerLink="/metodologia">Metodología</a></li>
+      <li><a routerLink="/finalidad">Finalidad</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
