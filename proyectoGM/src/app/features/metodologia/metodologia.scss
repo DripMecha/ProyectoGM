@@ -1,3 +1,4 @@
+
 :host {
   display: block;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
@@ -7,10 +8,254 @@
 .contenido {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 2rem;
+  padding: 3rem 2rem;
   min-height: 45vh;
+  box-sizing: border-box;
 }
 
-.pendiente {
-  color: #4a5470;
+.metodologia h2 {
+  color: #0b2045;
+  font-size: 27px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.metodologia p {
+  line-height: 1.7;
+}
+
+/* INTRODUCCIÓN */
+
+.metodologia-intro {
+  max-width: 850px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.etiqueta {
+  display: inline-block;
+  color: #d91f2b;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.metodologia-intro h2 {
+  font-size: 35px;
+  margin: 10px 0 18px;
+}
+
+.metodologia-intro p {
+  color: #5d6676;
+  font-size: 16px;
+}
+
+/* FASES */
+
+.fases,
+.herramientas {
+  margin-bottom: 65px;
+}
+
+.descripcion {
+  text-align: center;
+  color: #687386;
+  margin-bottom: 30px;
+}
+
+.fases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.fase-card {
+  background: #fff;
+  border: 1px solid #e4e8ef;
+  border-top: 4px solid #d91f2b;
+  border-radius: 10px;
+  padding: 27px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fase-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
+}
+
+.numero {
+  display: inline-block;
+  color: #d91f2b;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.fase-card h3 {
+  color: #0b2045;
+  font-size: 20px;
+  margin: 5px 0 12px;
+}
+
+.fase-card p {
+  color: #5d6676;
+  font-size: 14px;
+}
+
+.fase-card ul {
+  padding-left: 20px;
+  color: #4f5d71;
+  line-height: 2;
+  font-size: 14px;
+}
+
+.fase-card li::marker {
+  color: #d91f2b;
+}
+
+/* HERRAMIENTAS */
+
+.herramientas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.herramienta-card {
+  background: #0b2045;
+  padding: 25px 18px;
+  border-radius: 10px;
+  text-align: center;
+  border-bottom: 4px solid #d91f2b;
+  transition: transform 0.25s ease;
+}
+
+.herramienta-card:hover {
+  transform: translateY(-5px);
+}
+
+.herramienta-card h3 {
+  color: #fff;
+  font-size: 17px;
+  padding-bottom: 13px;
+  border-bottom: 2px solid #d91f2b;
+  margin-top: 0;
+}
+
+.herramienta-card p {
+  color: #e0e7f3;
+  font-size: 14px;
+  margin: 12px 0;
+}
+
+/* TRABAJO COLABORATIVO */
+
+.trabajo-colaborativo {
+  background: #f3f5f9;
+  padding: 35px;
+  border-radius: 12px;
+  margin-bottom: 45px;
+}
+
+.trabajo-colaborativo p {
+  color: #5d6676;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.flujo-git {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.flujo-git span {
+  background: #0b2045;
+  color: #fff;
+  padding: 13px 18px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.flujo-git b {
+  color: #d91f2b;
+  font-size: 22px;
+}
+
+/* PRÓXIMAS FUNCIONALIDADES */
+
+.proximas-funcionalidades {
+  margin-bottom: 25px;
+}
+
+.proximas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 25px;
+}
+
+.proximas-grid article {
+  padding: 25px;
+  border: 1px solid #e4e8ef;
+  border-left: 4px solid #d91f2b;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.proximas-grid h3 {
+  color: #0b2045;
+  margin-top: 0;
+}
+
+.proximas-grid p {
+  color: #5d6676;
+  font-size: 14px;
+}
+
+/* DISEÑO RESPONSIVE */
+
+@media (max-width: 900px) {
+  .herramientas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .contenido {
+    padding: 2rem 1rem;
+  }
+
+  .metodologia-intro h2 {
+    font-size: 27px;
+  }
+
+  .metodologia h2 {
+    font-size: 23px;
+  }
+
+  .fases-grid,
+  .herramientas-grid,
+  .proximas-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trabajo-colaborativo {
+    padding: 25px 18px;
+  }
+
+  .flujo-git {
+    flex-direction: column;
+  }
+
+  .flujo-git b {
+    transform: rotate(90deg);
+  }
 }

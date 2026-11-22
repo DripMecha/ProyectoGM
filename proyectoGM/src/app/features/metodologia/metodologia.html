@@ -1,10 +1,183 @@
+
 <app-navbar />
 <app-banner titulo="Metodología" />
 
-<main class="contenido">
-  <!-- Responsable: Cristhian (rama feature/metodologia) -->
-  <!-- Va aquí: descripción de la metodología de programación, todas las fases. -->
-  <p class="pendiente">Sección en construcción.</p>
+<main class="contenido metodologia">
+
+  <!-- Introducción -->
+  <section class="metodologia-intro">
+    <span class="etiqueta">PROYECTO GENUINE MOTORS</span>
+    <h2>Metodología de desarrollo</h2>
+    <p>
+      Para desarrollar nuestro sistema web Genuine Motors,
+      organizamos el trabajo en diferentes fases que permiten
+      planificar, desarrollar, integrar y verificar cada
+      funcionalidad del proyecto.
+    </p>
+  </section>
+
+  <!-- Fases del proyecto -->
+  <section class="fases">
+    <h2>Fases del desarrollo</h2>
+    <p class="descripcion">
+      Nuestro proyecto se desarrolló siguiendo las siguientes etapas:
+    </p>
+
+    <div class="fases-grid">
+
+      <article class="fase-card">
+        <span class="numero">01</span>
+        <h3>Diseño y base</h3>
+        <p>
+          Se organizaron las actividades del equipo y se definió
+          la estructura inicial del sistema.
+        </p>
+        <ul>
+          <li>Análisis de los requerimientos.</li>
+          <li>Distribución de responsabilidades.</li>
+          <li>Diseño de las interfaces.</li>
+          <li>Creación de ramas y estructura del proyecto.</li>
+        </ul>
+      </article>
+
+      <article class="fase-card">
+        <span class="numero">02</span>
+        <h3>Desarrollo</h3>
+        <p>
+          Se realizó la programación de las diferentes secciones
+          y funcionalidades del sistema.
+        </p>
+        <ul>
+          <li>Desarrollo de componentes con Angular.</li>
+          <li>Implementación de estilos e interfaces.</li>
+          <li>Desarrollo del backend con Spring Boot.</li>
+          <li>Conexión con la base de datos MySQL.</li>
+        </ul>
+      </article>
+
+      <article class="fase-card">
+        <span class="numero">03</span>
+        <h3>Integración y pruebas</h3>
+        <p>
+          Se integraron los avances de cada integrante y se
+          verificó el funcionamiento de las diferentes secciones.
+        </p>
+        <ul>
+          <li>Actualización de las ramas de GitHub.</li>
+          <li>Revisión de Pull Requests.</li>
+          <li>Integración de los componentes.</li>
+          <li>Corrección de errores y pruebas.</li>
+        </ul>
+      </article>
+
+      <article class="fase-card">
+        <span class="numero">04</span>
+        <h3>Cierre y sustentación</h3>
+        <p>
+          Se preparó la presentación del avance y se organizaron
+          los resultados obtenidos durante el desarrollo.
+        </p>
+        <ul>
+          <li>Preparación de las diapositivas.</li>
+          <li>Organización de la demostración.</li>
+          <li>Ensayo de la exposición.</li>
+          <li>Verificación final del proyecto.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Herramientas -->
+  <section class="herramientas">
+    <h2>Herramientas y tecnologías</h2>
+    <p class="descripcion">
+      Tecnologías utilizadas durante el desarrollo del proyecto.
+    </p>
+
+    <div class="herramientas-grid">
+
+      <article class="herramienta-card">
+        <h3>Frontend</h3>
+        <p>Angular</p>
+        <p>TypeScript</p>
+        <p>HTML5 y CSS3</p>
+      </article>
+
+      <article class="herramienta-card">
+        <h3>Backend</h3>
+        <p>Java</p>
+        <p>Spring Boot</p>
+        <p>API REST</p>
+      </article>
+
+      <article class="herramienta-card">
+        <h3>Base de datos</h3>
+        <p>MySQL</p>
+        <p>SQL</p>
+        <p>MySQL Workbench</p>
+      </article>
+
+      <article class="herramienta-card">
+        <h3>Control de versiones</h3>
+        <p>Visual Studio Code</p>
+        <p>Git</p>
+        <p>GitHub</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Trabajo colaborativo -->
+  <section class="trabajo-colaborativo">
+    <h2>Trabajo colaborativo con GitHub</h2>
+
+    <p>
+      Cada integrante trabaja en una rama independiente para
+      desarrollar su sección. Al finalizar, envía sus cambios
+      mediante un Pull Request hacia la rama develop.
+      El coordinador revisa e integra los cambios y,
+      cuando el proyecto está listo, se actualiza la rama main.
+    </p>
+
+    <div class="flujo-git">
+      <span>Rama individual</span>
+      <b>→</b>
+      <span>Pull Request</span>
+      <b>→</b>
+      <span>Develop</span>
+      <b>→</b>
+      <span>Main</span>
+    </div>
+  </section>
+
+  <!-- Próximo avance -->
+  <section class="proximas-funcionalidades">
+    <h2>Próximas funcionalidades</h2>
+    <p>
+      Para el avance final se contempla ampliar el sistema
+      mediante nuevas funcionalidades:
+    </p>
+
+    <div class="proximas-grid">
+      <article>
+        <h3>Ofertas</h3>
+        <p>
+          Incorporación de productos con descuentos para
+          ofrecer promociones a los clientes.
+        </p>
+      </article>
+
+      <article>
+        <h3>Carrito de compras</h3>
+        <p>
+          Implementación de un carrito que permita agregar
+          productos y generar una boleta o comprobante.
+        </p>
+      </article>
+    </div>
+  </section>
+
 </main>
 
 <app-footer />
