@@ -1,0 +1,49 @@
+$azul-oscuro: #071b3e;
+$rojo: #d8232a;
+$gris: #4a5470;
+$borde: #d9dee8;
+
+.reporte {
+  background: #ffffff;
+  border: 1px solid $borde;
+  border-top: 4px solid $rojo;
+  border-radius: 10px;
+  padding: 1.4rem;
+  box-shadow: 0 4px 14px rgba(7, 27, 62, 0.06);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: $azul-oscuro;
+  }
+}
+
+.etiqueta {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #fff4e0;
+  color: #9a5b00;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.grafico {
+  position: relative;
+  height: 300px;
+}
+
+.descripcion {
+  margin: 1rem 0 0;
+  line-height: 1.6;
+  color: $gris;
+}

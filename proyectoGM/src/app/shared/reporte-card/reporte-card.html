@@ -1,0 +1,14 @@
+<article class="reporte">
+  <header>
+    <h3>{{ reporte().titulo }}</h3>
+    @if (reporte().origen === 'ejemplo') {
+      <span class="etiqueta">Datos de ejemplo</span>
+    }
+  </header>
+
+  <div class="grafico">
+    <canvas #lienzo></canvas>
+  </div>
+
+  <p class="descripcion"><strong>Resultado:</strong> {{ reporte().descripcion }}</p>
+</article>
