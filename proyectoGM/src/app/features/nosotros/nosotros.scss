@@ -1,3 +1,9 @@
+$azul: #0b2a5b;
+$azul-oscuro: #071b3e;
+$rojo: #d8232a;
+$gris: #5d6676;
+$borde: #e4e8ef;
+
 :host {
   display: block;
   font-family: 'Segoe UI', Roboto, Arial, sans-serif;
@@ -9,8 +15,314 @@
   margin: 0 auto;
   padding: 2.5rem 2rem;
   min-height: 45vh;
+  box-sizing: border-box;
 }
 
-.pendiente {
-  color: #4a5470;
+h2 {
+  color: $azul;
+}
+
+.etiqueta {
+  display: inline-block;
+  color: $rojo;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+/* ---------- 1. SLIDER ---------- */
+.slider {
+  position: relative;
+  height: 380px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $azul-oscuro;
+  margin-bottom: 4rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+
+  &.activo {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.slide-texto {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2rem 4rem 3rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(7, 27, 62, 0.9));
+
+  h2 {
+    color: #fff;
+    margin: 0 0 0.4rem;
+    font-size: 1.8rem;
+  }
+
+  p {
+    margin: 0;
+    max-width: 650px;
+    line-height: 1.5;
+  }
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: $azul;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover {
+    background: $rojo;
+    color: #fff;
+  }
+
+  &.izq {
+    left: 14px;
+  }
+
+  &.der {
+    right: 14px;
+  }
+}
+
+.puntos {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+
+  button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+
+    &.activo {
+      background: $rojo;
+      border-color: $rojo;
+    }
+  }
+}
+
+/* ---------- 2. ORGANIGRAMA ---------- */
+.organigrama {
+  text-align: center;
+  margin-bottom: 4rem;
+
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 2rem;
+  }
+}
+
+.nivel {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+
+  &.ramas {
+    flex-wrap: wrap;
+  }
+}
+
+.linea {
+  width: 3px;
+  height: 28px;
+  margin: 0 auto;
+  background: $rojo;
+}
+
+.puesto {
+  background: #fff;
+  border: 1px solid $borde;
+  border-top: 4px solid $azul;
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  width: 270px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  &.principal {
+    border-top-color: $rojo;
+    background: $azul;
+    color: #fff;
+
+    .cargo {
+      color: #ffb3b6;
+    }
+
+    p {
+      color: #d9e1ef;
+    }
+  }
+
+  strong {
+    display: block;
+    margin: 0.3rem 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: $gris;
+    line-height: 1.5;
+  }
+}
+
+.cargo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $rojo;
+}
+
+.contacto {
+  margin: 2.5rem auto 0;
+  max-width: 480px;
+  padding: 1.3rem 1.5rem;
+  border: 2px dashed $rojo;
+  border-radius: 10px;
+  text-align: left;
+
+  strong {
+    display: block;
+    margin: 0.3rem 0 0.6rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: $gris;
+    line-height: 1.8;
+  }
+
+  a {
+    color: $azul;
+  }
+}
+
+/* ---------- 3. EQUIPO ---------- */
+.equipo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.foto-equipo {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.equipo-texto {
+  h2 {
+    font-size: 1.9rem;
+    margin: 0 0 1rem;
+  }
+
+  p {
+    color: $gris;
+    line-height: 1.7;
+  }
+}
+
+.valores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.valor {
+  background: #f4f6fa;
+  border-left: 4px solid $rojo;
+  border-radius: 6px;
+  padding: 0.8rem;
+
+  strong {
+    display: block;
+    color: $azul;
+  }
+
+  span {
+    font-size: 0.85rem;
+    color: $gris;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 800px) {
+  .contenido {
+    padding: 1.5rem 1rem;
+  }
+
+  .slider {
+    height: 300px;
+  }
+
+  .slide-texto {
+    padding: 1.5rem 1.2rem 2.5rem;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .flecha {
+    display: none;
+  }
+
+  .nivel {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .equipo {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-equipo {
+    height: 240px;
+  }
+
+  .valores {
+    grid-template-columns: 1fr;
+  }
 }
