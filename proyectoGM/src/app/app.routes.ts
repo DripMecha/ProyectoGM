@@ -1,3 +1,4 @@
+
 import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
 import { AdminCrudComponent } from './features/admin/admin-crud/admin.component';
@@ -22,7 +23,8 @@ export const routes: Routes = [
   {
     path: 'desarrolladores',
     loadComponent: () =>
-      import('./features/desarrolladores/desarrolladores').then(m => m.DesarrolladoresComponent),
+      import('./features/desarrolladores/desarrolladores.component')
+        .then(m => m.DesarrolladoresComponent),
   },
   {
     path: 'metodologia',
