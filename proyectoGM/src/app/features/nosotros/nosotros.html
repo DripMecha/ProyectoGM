@@ -1,0 +1,107 @@
+<app-navbar />
+<app-banner titulo="Nosotros" />
+
+<main class="contenido">
+  <!-- 1. SLIDER DE 3 IMÁGENES -->
+  <section class="slider" aria-roledescription="carrusel" aria-label="Presentación de la empresa">
+    @for (slide of slides; track slide.imagen; let i = $index) {
+      <div class="slide" [class.activo]="i === actual()" [attr.aria-hidden]="i !== actual()">
+        <img [src]="slide.imagen" [alt]="slide.titulo" />
+        <div class="slide-texto">
+          <h2>{{ slide.titulo }}</h2>
+          <p>{{ slide.texto }}</p>
+        </div>
+      </div>
+    }
+
+    <button class="flecha izq" type="button" (click)="anterior()" aria-label="Imagen anterior">‹</button>
+    <button class="flecha der" type="button" (click)="siguiente()" aria-label="Imagen siguiente">›</button>
+
+    <div class="puntos">
+      @for (slide of slides; track slide.imagen; let i = $index) {
+        <button
+          type="button"
+          [class.activo]="i === actual()"
+          (click)="irA(i)"
+          [attr.aria-label]="'Ir a la imagen ' + (i + 1)"
+        ></button>
+      }
+    </div>
+  </section>
+
+  <!-- 2. ORGANIGRAMA -->
+  <section class="organigrama">
+    <span class="etiqueta">NUESTRA ORGANIZACIÓN</span>
+    <h2>Organigrama</h2>
+
+    <div class="nivel">
+      <article class="puesto principal">
+        <span class="cargo">{{ jefe.cargo }}</span>
+        <strong>{{ jefe.nombre }}</strong>
+        <p>{{ jefe.funcion }}</p>
+      </article>
+    </div>
+
+    <div class="linea"></div>
+
+    <div class="nivel">
+      <article class="puesto">
+        <span class="cargo">{{ coordinador.cargo }}</span>
+        <strong>{{ coordinador.nombre }}</strong>
+        <p>{{ coordinador.funcion }}</p>
+      </article>
+    </div>
+
+    <div class="linea"></div>
+
+    <div class="nivel ramas">
+      @for (p of cargos; track p.cargo) {
+        <article class="puesto">
+          <span class="cargo">{{ p.cargo }}</span>
+          <strong>{{ p.nombre }}</strong>
+          <p>{{ p.funcion }}</p>
+        </article>
+      }
+    </div>
+
+    <article class="contacto">
+      <span class="cargo">{{ contacto.cargo }}</span>
+      <strong>{{ contacto.nombre }}</strong>
+      <ul>
+        <li>Teléfono: <a href="tel:+51934515537">{{ contacto.telefono }}</a></li>
+        <li>Correo: <a [href]="'mailto:' + contacto.correo">{{ contacto.correo }}</a></li>
+        <li>Dirección: {{ contacto.direccion }}</li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- 3. FOTO Y DESCRIPCIÓN DEL EQUIPO -->
+  <section class="equipo">
+    <img class="foto-equipo" [src]="fotoEquipo" alt="Equipo de Genuine Motors" />
+
+    <div class="equipo-texto">
+      <span class="etiqueta">NUESTRO EQUIPO</span>
+      <h2>Personas que mueven tu auto</h2>
+      <p>
+        Desde el 17 de enero de 2023 atendemos a talleres mecánicos y conductores con repuestos
+        para vehículos Hyundai y KIA: bobinas, kits de embrague, suspensión, partes de motor y kits
+        de mantenimiento.
+      </p>
+      <p>
+        Nuestro equipo trabaja para que cada cliente confíe en nosotros: le ayudamos a encontrar
+        el repuesto correcto y se lo entregamos rápido.
+      </p>
+
+      <div class="valores">
+        @for (v of valores; track v.titulo) {
+          <div class="valor">
+            <strong>{{ v.titulo }}</strong>
+            <span>{{ v.texto }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer />

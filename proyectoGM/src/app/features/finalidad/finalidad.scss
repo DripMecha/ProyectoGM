@@ -1,0 +1,150 @@
+$azul: #0b2a5b;
+$azul-oscuro: #071b3e;
+$rojo: #d8232a;
+$texto: #16213a;
+$gris: #4a5470;
+$borde: #d9dee8;
+$fondo: #f4f6fb;
+
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: $texto;
+}
+
+.contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.bloque {
+  margin-bottom: 3rem;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1.4rem;
+    font-size: 1.5rem;
+    color: $azul-oscuro;
+
+    i {
+      color: $rojo;
+    }
+  }
+}
+
+// Tarjetas de finalidad
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.tarjeta {
+  background: #ffffff;
+  border: 1px solid $borde;
+  border-top: 4px solid $rojo;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 14px rgba(7, 27, 62, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(7, 27, 62, 0.12);
+  }
+
+  .icono {
+    font-size: 2rem;
+    color: $azul;
+  }
+
+  h3 {
+    margin: 0.6rem 0 0.5rem;
+    font-size: 1.15rem;
+    color: $azul-oscuro;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    color: $gris;
+  }
+}
+
+// Agradecimientos
+.agradecimientos {
+  background: $fondo;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.lista-gracias {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+
+    i {
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: $azul;
+      color: #ffffff;
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Mensaje de cierre
+.cierre {
+  text-align: center;
+  background: linear-gradient(135deg, $azul-oscuro, $azul);
+  color: #ffffff;
+  border-radius: 12px;
+  border-bottom: 4px solid $rojo;
+  padding: 2.2rem 1.5rem;
+
+  i {
+    font-size: 2rem;
+  }
+
+  p {
+    max-width: 760px;
+    margin: 0.8rem auto 0;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
+  .firma {
+    font-size: 0.9rem;
+    color: #c9d4ee;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .contenido {
+    padding: 1.5rem 1rem;
+  }
+
+  .agradecimientos {
+    padding: 1.4rem 1rem;
+  }
+}
