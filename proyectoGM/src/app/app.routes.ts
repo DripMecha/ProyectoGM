@@ -14,6 +14,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/catalogo/catalogo.component').then(m => m.CatalogoComponent),
   },
+  {
+    path: 'desarrolladores',
+    loadComponent: () =>
+      import('./features/desarrolladores/desarrolladores.component')
+        .then(m => m.DesarrolladoresComponent),
+  },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminCrudComponent, canActivate: [adminGuard] },
 ];

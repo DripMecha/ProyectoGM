@@ -1,0 +1,89 @@
+<app-header />
+
+<main class="desarrolladores-page">
+
+    <section class="presentacion">
+        <span class="etiqueta">Genuine Motors Parts</span>
+        <h1>Nuestro equipo de desarrollo</h1>
+        <p>
+            Conoce a los integrantes que hicieron posible el desarrollo
+            de nuestra plataforma web.
+        </p>
+    </section>
+
+    <section class="equipo">
+
+        @for (persona of desarrolladores; track persona.nombre) {
+        <article class="tarjeta-desarrollador">
+
+            <div class="foto-container">
+                <img [src]="persona.foto" [alt]="'Fotografía de ' + persona.nombre">
+            </div>
+
+            <div class="informacion">
+
+                <h2>{{ persona.nombre }}</h2>
+
+                <div class="grupo-datos">
+                    <h3>Programas y herramientas</h3>
+
+                    @if (persona.programas.length > 0) {
+                    <ul>
+                        @for (programa of persona.programas; track programa) {
+                        <li>{{ programa }}</li>
+                        }
+                    </ul>
+                    } @else {
+                    <p class="pendiente">Información por completar</p>
+                    }
+                </div>
+
+                <div class="grupo-datos">
+                    <h3>Lenguajes de programación</h3>
+
+                    @if (persona.lenguajes.length > 0) {
+                    <ul>
+                        @for (lenguaje of persona.lenguajes; track lenguaje) {
+                        <li>{{ lenguaje }}</li>
+                        }
+                    </ul>
+                    } @else {
+                    <p class="pendiente">Información por completar</p>
+                    }
+                </div>
+
+                <div class="grupo-datos">
+                    <h3>Habilidades blandas</h3>
+
+                    @if (persona.habilidades.length > 0) {
+                    <ul>
+                        @for (habilidad of persona.habilidades; track habilidad) {
+                        <li>{{ habilidad }}</li>
+                        }
+                    </ul>
+                    } @else {
+                    <p class="pendiente">Información por completar</p>
+                    }
+                </div>
+
+                <div class="acciones-cv">
+
+                    <a class="btn-ver-cv" [href]="persona.cv" target="_blank" rel="noopener noreferrer">
+                        Ver CV
+                    </a>
+
+                    <a class="btn-cv" [href]="persona.cv" [attr.download]="persona.nombre + '-CV.pdf'">
+                        ↓ Descargar CV
+                    </a>
+
+                </div>
+
+            </div>
+        </article>
+        }
+
+    </section>
+
+</main>
+
+<app-footer />
