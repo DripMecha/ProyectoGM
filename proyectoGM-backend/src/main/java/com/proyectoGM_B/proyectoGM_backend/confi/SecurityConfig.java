@@ -14,13 +14,17 @@ public class SecurityConfig {
 
         http
             .csrf(csrf -> csrf
-                .ignoringRequestMatchers("/api/productos", "/api/productos/**")
+                .ignoringRequestMatchers(
+                    "/api/productos",
+                    "/api/productos/**"
+                )
             )
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                     "/api/prueba",
                     "/api/productos",
-                    "/api/productos/**"
+                    "/api/productos/**",
+                    "/api/ofertas"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
