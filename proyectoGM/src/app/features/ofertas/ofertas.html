@@ -1,0 +1,53 @@
+<app-navbar />
+<app-banner titulo="Ofertas" />
+
+<main class="contenido">
+  <section class="intro">
+    <span class="etiqueta">PROMOCIONES GENUINE MOTORS</span>
+    <h2>Repuestos con descuento</h2>
+    <p>Todos los productos de esta sección tienen al menos {{ minimo }}% de descuento.</p>
+    @if (carrito.cantidadTotal() > 0) {
+      <p class="en-carrito">
+        Tienes {{ carrito.cantidadTotal() }} producto(s) en tu carrito ·
+        Total {{ carrito.total() | currency: 'PEN' : 'S/ ' : '1.2-2' }}
+      </p>
+    }
+  </section>
+
+  @if (resultado(); as r) {
+    @if (r.origen === 'ejemplo') {
+      <p class="aviso">No se pudo conectar con la base de datos. Se muestran ofertas de ejemplo.</p>
+    }
+
+    <div class="rejilla">
+      @for (o of r.ofertas; track o.id) {
+        <article class="tarjeta">
+          <span class="insignia">-{{ o.descuento }}%</span>
+          <div class="foto">
+            @if (o.imagen) {
+              <img [src]="o.imagen" [alt]="o.nombre" loading="lazy" />
+            }
+          </div>
+          <div class="datos">
+            <span class="marca">{{ o.marca }}</span>
+            <h3>{{ o.nombre }}</h3>
+            <p class="precios">
+              <del>{{ o.precioLista | currency: 'PEN' : 'S/ ' : '1.2-2' }}</del>
+              <strong>{{ o.precioOferta | currency: 'PEN' : 'S/ ' : '1.2-2' }}</strong>
+            </p>
+            <p class="ahorro">Ahorras {{ ahorro(o) | currency: 'PEN' : 'S/ ' : '1.2-2' }}</p>
+            <button type="button" (click)="agregar(o)" [class.ok]="agregado() === o.id">
+              {{ agregado() === o.id ? '¡Agregado!' : 'Agregar al carrito' }}
+            </button>
+          </div>
+        </article>
+      } @empty {
+        <p class="aviso">Por ahora no hay ofertas disponibles.</p>
+      }
+    </div>
+  } @else {
+    <p class="cargando">Cargando ofertas...</p>
+  }
+</main>
+
+<app-footer />

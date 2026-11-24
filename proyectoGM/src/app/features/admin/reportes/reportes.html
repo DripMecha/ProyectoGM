@@ -1,0 +1,21 @@
+<app-navbar />
+<app-banner titulo="Reportes" />
+
+<main class="contenido">
+  <p class="intro">Panel del administrador: cada reporte muestra su gráfico y la descripción del resultado.</p>
+
+  <div class="rejilla">
+    <app-reporte-ventas-mes />
+    <app-reporte-productos-vendidos />
+    <app-reporte-ventas-categoria />
+
+    <!-- Reporte 4 · Productos con stock bajo (Ariana) -->
+    <section class="pendiente"><h3>Reporte 4 · Productos con stock bajo</h3><p>En construcción.</p></section>
+    <!-- Reporte 5 · Pedidos por estado (Abel) -->
+    <app-reporte-pedidos-estado />
+    <!-- Reporte 6 · Ventas por marca (Abel) -->
+    <app-reporte-ventas-marca />
+  </div>
+</main>
+
+<app-footer />

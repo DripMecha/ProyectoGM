@@ -19,6 +19,8 @@ export class Navbar {
     { texto: 'Metodología', ruta: '/metodologia' },
     { texto: 'Finalidad', ruta: '/finalidad' },
     { texto: 'Catálogo', ruta: '/catalogo' },
+    { texto: 'Ofertas', ruta: '/ofertas' },
+    { texto: 'Contactos', ruta: '/contactos' },
   ];
 
   menuAbierto = false;

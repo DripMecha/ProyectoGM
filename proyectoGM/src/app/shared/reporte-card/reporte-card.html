@@ -1,0 +1,27 @@
+<article class="reporte">
+  <header>
+    <h3>{{ reporte().titulo }}</h3>
+    @if (reporte().origen === 'ejemplo') {
+      <span class="etiqueta">Datos de ejemplo</span>
+    }
+  </header>
+
+  <div class="grafico">
+    <canvas #lienzo></canvas>
+  </div>
+
+  <p class="descripcion"><strong>Resultado:</strong> {{ reporte().descripcion }}</p>
+
+  <div class="descargas">
+    <span>Descargar informe:</span>
+    <button type="button" class="excel" [disabled]="descargando()" (click)="descargar('excel')">
+      {{ descargando() === 'excel' ? '...' : 'Excel' }}
+    </button>
+    <button type="button" class="pdf" [disabled]="descargando()" (click)="descargar('pdf')">
+      {{ descargando() === 'pdf' ? '...' : 'PDF' }}
+    </button>
+    <button type="button" class="word" [disabled]="descargando()" (click)="descargar('word')">
+      {{ descargando() === 'word' ? '...' : 'Word' }}
+    </button>
+  </div>
+</article>
