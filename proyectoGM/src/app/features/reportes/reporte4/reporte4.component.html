@@ -1,0 +1,86 @@
+<div class="reporte">
+
+    <header class="encabezado no-imprimir">
+        <div>
+            <h1>Reporte general de productos</h1>
+            <p>Genuine Motors Parts</p>
+        </div>
+
+        <button (click)="imprimir()">
+            Imprimir reporte
+        </button>
+    </header>
+
+    <section class="indicadores">
+
+        <article class="indicador">
+            <span>Total de productos</span>
+            <h2>{{ totalProductos }}</h2>
+        </article>
+
+        <article class="indicador">
+            <span>Marcas registradas</span>
+            <h2>{{ totalMarcas }}</h2>
+        </article>
+
+        <article class="indicador">
+            <span>Precio promedio</span>
+            <h2>{{ precioPromedio | currency:'PEN':'symbol':'1.2-2' }}</h2>
+        </article>
+
+    </section>
+
+    <section class="filtros no-imprimir">
+
+        <input type="text" placeholder="Buscar producto..." [(ngModel)]="busqueda">
+
+        <select [(ngModel)]="marcaSeleccionada">
+            <option value="">Todas las marcas</option>
+            <option *ngFor="let marca of marcas" [value]="marca">
+                {{ marca }}
+            </option>
+        </select>
+
+        <button (click)="limpiarFiltros()">
+            Limpiar
+        </button>
+
+    </section>
+
+    <section class="tabla-contenedor">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Precio</th>
+                    <th>Vencimiento</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let p of productosFiltrados">
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.marca }}</td>
+                    <td>{{ p.precio | currency:'PEN':'symbol':'1.2-2' }}</td>
+                    <td>
+                        {{ p.fechaVencimiento || 'No aplica' }}
+                    </td>
+                </tr>
+
+                <tr *ngIf="productosFiltrados.length === 0">
+                    <td colspan="5">No se encontraron productos.</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </section>
+
+    <footer>
+        Total de registros: {{ productosFiltrados.length }}
+    </footer>
+
+</div>
