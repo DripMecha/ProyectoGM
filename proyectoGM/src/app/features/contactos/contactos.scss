@@ -1,0 +1,275 @@
+$azul: #0b2a5b;
+$azul-oscuro: #071b3e;
+$rojo: #d8232a;
+$rojo-hover: #a9161c;
+$texto: #16213a;
+$gris: #4a5470;
+$borde: #d9dee8;
+$fondo: #f4f6fb;
+
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: $texto;
+}
+
+// ---------- Slider ----------
+.slider {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  background: $azul-oscuro;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, $azul-oscuro, $azul);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  &.activa {
+    opacity: 1;
+  }
+}
+
+.slide-texto {
+  max-width: 640px;
+  padding: 1.2rem 2rem;
+  background: rgba(7, 27, 62, 0.55);
+  border-radius: 10px;
+
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  color: $azul-oscuro;
+  font-size: 1.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background: #ffffff;
+  }
+
+  &.izq {
+    left: 1rem;
+  }
+
+  &.der {
+    right: 1rem;
+  }
+}
+
+.puntos {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.punto {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+
+  &.activo {
+    background: $rojo;
+    border-color: $rojo;
+  }
+}
+
+// ---------- Contenido ----------
+.contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.2rem;
+  font-size: 1.5rem;
+  color: $azul-oscuro;
+
+  i {
+    color: $rojo;
+  }
+}
+
+.contacto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.caja {
+  background: #ffffff;
+  border: 1px solid $borde;
+  border-top: 4px solid $rojo;
+  border-radius: 10px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 14px rgba(7, 27, 62, 0.06);
+}
+
+form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input,
+textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid $borde;
+  border-radius: 7px;
+  font: inherit;
+  font-weight: 400;
+  color: $texto;
+
+  &:focus {
+    outline: 2px solid $azul;
+    border-color: $azul;
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: $rojo;
+  }
+}
+
+small {
+  color: $rojo;
+  font-weight: 400;
+}
+
+.btn-enviar {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 7px;
+  background: $rojo;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $rojo-hover;
+  }
+}
+
+.exito {
+  margin: 0 0 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 7px;
+  background: #e6f6ec;
+  color: #1c6b3a;
+  font-weight: 600;
+}
+
+iframe {
+  width: 100%;
+  height: 340px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.direccion {
+  margin: 1rem 0 0;
+  line-height: 1.9;
+  color: $gris;
+
+  i {
+    color: $azul;
+    margin-right: 0.4rem;
+  }
+}
+
+// ---------- Opiniones ----------
+.opiniones {
+  background: $fondo;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.tarjeta {
+  background: #ffffff;
+  border: 1px solid $borde;
+  border-radius: 10px;
+  padding: 1.4rem;
+  display: grid;
+  gap: 0.5rem;
+
+  .estrellas {
+    color: #f5a623;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    color: $gris;
+  }
+
+  span {
+    font-size: 0.85rem;
+    color: $gris;
+  }
+}
+
+@media (max-width: 850px) {
+  .contacto {
+    grid-template-columns: 1fr;
+  }
+
+  .slider {
+    height: 280px;
+  }
+
+  .contenido {
+    padding: 1.5rem 1rem;
+  }
+}

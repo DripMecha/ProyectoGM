@@ -17,30 +17,47 @@ export const routes: Routes = [
       import('./features/catalogo/catalogo.component')
         .then(m => m.CatalogoComponent),
   },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'nosotros',
+    loadComponent: () =>
+      import('./features/nosotros/nosotros').then(m => m.NosotrosComponent),
+  },
+  {
+    path: 'desarrolladores',
+    loadComponent: () =>
+      import('./features/desarrolladores/desarrolladores.component')
+        .then(m => m.DesarrolladoresComponent),
+  },
+  {
+    path: 'metodologia',
+    loadComponent: () =>
+      import('./features/metodologia/metodologia').then(m => m.MetodologiaComponent),
+  },
 
   {
-    path: 'admin',
-    component: AdminCrudComponent,
+    path: 'contactos',
+    loadComponent: () =>
+      import('./features/contactos/contactos').then(m => m.ContactosComponent),
+  },
+
+  {
+    path: 'ofertas',
+    loadComponent: () =>
+      import('./features/ofertas/ofertas').then(m => m.OfertasComponent),
+  },
+
+  {
+    path: 'admin/reportes',
+    loadComponent: () =>
+      import('./features/admin/reportes/reportes').then(m => m.ReportesComponent),
     canActivate: [adminGuard],
   },
+
   {
-    path: 'admin/reporte4',
+    path: 'finalidad',
     loadComponent: () =>
-      import('./features/reportes/reporte4/reporte4.component')
-        .then(m => m.Reporte4Component),
-    canActivate: [adminGuard],
+      import('./features/finalidad/finalidad').then(m => m.FinalidadComponent),
   },
-  {
-    path: 'carrito',
-    loadComponent: () =>
-      import('./features/carrito/carrito.component')
-        .then(m => m.CarritoComponent),
-  },
-  {
-    path: 'comprobante',
-    loadComponent: () =>
-      import('./features/comprobante/comprobante.component')
-        .then(m => m.ComprobanteComponent),
-  },
+  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminCrudComponent, canActivate: [adminGuard] },
 ];

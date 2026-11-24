@@ -1,106 +1,63 @@
-
 import { Injectable, computed, signal } from '@angular/core';
-import { Producto } from '../models/producto';
 
+// Producto dentro del carrito.
 export interface ItemCarrito {
-    producto: Producto;
-    cantidad: number;
+  id: number;
+  nombre: string;
+  precio: number;
+  imagen: string;
+  cantidad: number;
 }
 
-@Injectable({
-    providedIn: 'root'
-})
+const CLAVE = 'gm-carrito';
+
+// Carrito de compras compartido (lo usan Ofertas, Catálogo y la página /carrito).
+// Responsable: Ariana (feature/carrito). Esta versión base la dejó Abel para
+// conectar Ofertas; se puede ampliar manteniendo los nombres de los métodos.
+@Injectable({ providedIn: 'root' })
 export class CarritoService {
+  private _items = signal<ItemCarrito[]>(this.leer());
 
-    private readonly STORAGE_KEY = 'genuine_motors_carrito';
+  items = this._items.asReadonly();
+  cantidadTotal = computed(() => this._items().reduce((s, i) => s + i.cantidad, 0));
+  total = computed(() => this._items().reduce((s, i) => s + i.precio * i.cantidad, 0));
 
-    private cargar(): ItemCarrito[] {
-        try {
-            const datos = localStorage.getItem(this.STORAGE_KEY);
-            return datos ? JSON.parse(datos) as ItemCarrito[] : [];
-        } catch {
-            return [];
-        }
-    }
-
-    private items = signal<ItemCarrito[]>(this.cargar());
-
-    readonly carrito = this.items.asReadonly();
-
-    readonly cantidadTotal = computed(() =>
-        this.items().reduce((total, item) => total + item.cantidad, 0)
+  agregar(producto: Omit<ItemCarrito, 'cantidad'>, cantidad = 1): void {
+    const existe = this._items().some((i) => i.id === producto.id);
+    this.guardar(
+      existe
+        ? this._items().map((i) => (i.id === producto.id ? { ...i, cantidad: i.cantidad + cantidad } : i))
+        : [...this._items(), { ...producto, cantidad }],
     );
+  }
 
-    readonly subtotal = computed(() =>
-        this.items().reduce(
-            (total, item) => total + item.producto.precio * item.cantidad,
-            0
-        )
-    );
+  quitar(id: number): void {
+    this.guardar(this._items().filter((i) => i.id !== id));
+  }
 
-    // Los precios del catálogo ya incluyen IGV.
-    readonly total = computed(() => this.subtotal());
+  cambiarCantidad(id: number, cantidad: number): void {
+    if (cantidad <= 0) return this.quitar(id);
+    this.guardar(this._items().map((i) => (i.id === id ? { ...i, cantidad } : i)));
+  }
 
-    // IGV incluido en el precio (desglose referencial).
-    readonly igv = computed(() => this.subtotal() * 18 / 118);
+  vaciar(): void {
+    this.guardar([]);
+  }
 
-    private guardar(): void {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items()));
+  private guardar(items: ItemCarrito[]): void {
+    this._items.set(items);
+    try {
+      localStorage.setItem(CLAVE, JSON.stringify(items));
+    } catch {
+      // Sin localStorage (modo privado): el carrito sigue funcionando en memoria.
     }
+  }
 
-    agregar(producto: Producto): void {
-        this.items.update(items => {
-            const existente = items.find(
-                item => item.producto.id === producto.id
-            );
-
-            if (existente) {
-                return items.map(item =>
-                    item.producto.id === producto.id
-                        ? { ...item, cantidad: item.cantidad + 1 }
-                        : item
-                );
-            }
-
-            return [...items, { producto: { ...producto }, cantidad: 1 }];
-        });
-
-        this.guardar();
+  private leer(): ItemCarrito[] {
+    try {
+      return JSON.parse(localStorage.getItem(CLAVE) ?? '[]');
+    } catch {
+      return [];
     }
-
-    aumentar(id: number): void {
-        this.items.update(items =>
-            items.map(item =>
-                item.producto.id === id
-                    ? { ...item, cantidad: item.cantidad + 1 }
-                    : item
-            )
-        );
-        this.guardar();
-    }
-
-    disminuir(id: number): void {
-        this.items.update(items =>
-            items
-                .map(item =>
-                    item.producto.id === id
-                        ? { ...item, cantidad: item.cantidad - 1 }
-                        : item
-                )
-                .filter(item => item.cantidad > 0)
-        );
-        this.guardar();
-    }
-
-    eliminar(id: number): void {
-        this.items.update(items =>
-            items.filter(item => item.producto.id !== id)
-        );
-        this.guardar();
-    }
-
-    vaciar(): void {
-        this.items.set([]);
-        this.guardar();
-    }
+  }
 }
