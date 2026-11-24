@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
+import { Navbar } from '../../shared/navbar/navbar';
+import { Banner } from '../../shared/banner/banner';
 
 interface Desarrollador {
     nombre: string;
@@ -15,7 +17,7 @@ interface Desarrollador {
 @Component({
     selector: 'app-desarrolladores',
     standalone: true,
-    imports: [Header, Footer],
+    imports: [Header, Footer, Navbar, Banner],
     templateUrl: './desarrolladores.component.html',
     styleUrl: './desarrolladores.component.scss'
 })

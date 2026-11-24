@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #16213a;
+}
+
+.contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.intro {
+  margin: 0 0 1.6rem;
+  color: #4a5470;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 1.6rem;
+}
+
+.pendiente {
+  border: 2px dashed #d9dee8;
+  border-radius: 10px;
+  padding: 1.4rem;
+  color: #4a5470;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: #071b3e;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .contenido {
+    padding: 1.5rem 1rem;
+  }
+
+  .rejilla {
+    grid-template-columns: 1fr;
+  }
+}
