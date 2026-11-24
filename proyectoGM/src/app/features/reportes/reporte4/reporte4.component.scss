@@ -1,0 +1,226 @@
+$azul: #1f3a8a;
+$azul-oscuro: #0b1f4d;
+$azul-claro: #eef2fb;
+$rojo: #c8102e;
+$rojo-hover: #a50d26;
+$texto: #1c2438;
+$gris: #5b6478;
+$borde: #e2e7f0;
+
+.reporte {
+    padding: 30px;
+    background: #f5f7fb;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: $texto;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+
+    h1 {
+        color: $azul-oscuro;
+        margin: 0 0 8px;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    p {
+        color: $gris;
+        margin: 0;
+    }
+
+    button {
+        background: $rojo;
+        color: white;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 7px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background .2s, transform .2s;
+
+        &:hover {
+            background: $rojo-hover;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+.indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.indicador {
+    background: white;
+    padding: 25px;
+    border: 1px solid $borde;
+    border-left: 5px solid $azul;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(11, 31, 77, .05);
+
+    span {
+        color: $gris;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    h2 {
+        color: $rojo;
+        font-size: 27px;
+        margin: 12px 0 0;
+    }
+}
+
+.filtros {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    input,
+    select {
+        padding: 12px;
+        border: 1px solid $borde;
+        border-radius: 7px;
+        background: white;
+        outline: none;
+        color: $texto;
+        font-size: 14px;
+
+        &:focus {
+            border-color: $azul;
+            box-shadow: 0 0 0 3px rgba(31, 58, 138, .10);
+        }
+    }
+
+    input {
+        flex: 1;
+    }
+
+    button {
+        background: $azul;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-weight: 600;
+
+        &:hover {
+            background: $azul-oscuro;
+        }
+    }
+}
+
+.tabla-contenedor {
+    background: white;
+    border: 1px solid $borde;
+    border-radius: 10px;
+    overflow-x: auto;
+    box-shadow: 0 3px 10px rgba(11, 31, 77, .05);
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 650px;
+    }
+
+    th {
+        background: $azul-oscuro;
+        color: white;
+        padding: 15px;
+        text-align: left;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 14px 15px;
+        border-bottom: 1px solid #edf0f5;
+        color: $texto;
+        font-size: 14px;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #f8faff;
+    }
+
+    tbody tr:hover {
+        background: $azul-claro;
+    }
+}
+
+footer {
+    text-align: right;
+    margin-top: 18px;
+    color: $gris;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .reporte {
+        padding: 15px;
+    }
+
+    .indicadores {
+        grid-template-columns: 1fr;
+    }
+
+    .encabezado {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filtros {
+        flex-direction: column;
+
+        input,
+        select,
+        button {
+            width: 100%;
+            min-height: 42px;
+        }
+    }
+}
+
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    .no-imprimir {
+        display: none !important;
+    }
+
+    .reporte {
+        background: white;
+        padding: 0;
+        min-height: auto;
+    }
+
+    .indicador,
+    .tabla-contenedor {
+        box-shadow: none;
+    }
+
+    .indicadores {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+    tr {
+        break-inside: avoid;
+    }
+}

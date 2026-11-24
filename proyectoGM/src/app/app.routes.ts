@@ -8,12 +8,14 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/inicio-publico/inicio-publico').then(m => m.InicioPublicoComponent),
+      import('./features/inicio-publico/inicio-publico')
+        .then(m => m.InicioPublicoComponent),
   },
   {
     path: 'catalogo',
     loadComponent: () =>
-      import('./features/catalogo/catalogo.component').then(m => m.CatalogoComponent),
+      import('./features/catalogo/catalogo.component')
+        .then(m => m.CatalogoComponent),
   },
   {
     path: 'nosotros',
