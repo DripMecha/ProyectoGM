@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, input, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, inject, input, signal, viewChild } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { Reporte } from '../../core/models/reporte.model';
+import { InformeService } from '../../core/services/informe.service';
 
 Chart.register(...registerables);
 
@@ -19,6 +20,26 @@ export class ReporteCard implements AfterViewInit, OnDestroy {
 
   private lienzo = viewChild.required<ElementRef<HTMLCanvasElement>>('lienzo');
   private grafico?: Chart;
+  private informe = inject(InformeService);
+
+  // Formato que se está generando (para desactivar los botones mientras tanto).
+  descargando = signal<'excel' | 'pdf' | 'word' | null>(null);
+
+  // Botones Excel, PDF y Word (Abel · InformeService).
+  async descargar(formato: 'excel' | 'pdf' | 'word'): Promise<void> {
+    this.descargando.set(formato);
+    try {
+      const r = this.reporte();
+      if (formato === 'excel') await this.informe.descargarExcel(r);
+      if (formato === 'pdf') await this.informe.descargarPdf(r, this.imagen());
+      if (formato === 'word') await this.informe.descargarWord(r, this.imagen());
+    } catch (e) {
+      console.error('No se pudo generar el informe', e);
+      alert('No se pudo generar el informe. Inténtalo otra vez.');
+    } finally {
+      this.descargando.set(null);
+    }
+  }
 
   ngAfterViewInit(): void {
     this.grafico = new Chart(this.lienzo().nativeElement, this.configuracion());

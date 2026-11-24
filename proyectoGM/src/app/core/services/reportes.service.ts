@@ -53,4 +53,18 @@ export class ReportesService {
       { etiquetas: ['Motor', 'Suspensión', 'Frenos', 'Filtros', 'Eléctrico'], valores: [7400, 6100, 5200, 4300, 2800] },
       d => `La categoría con más ventas fue ${mayor(d).etiqueta}, con ${soles(mayor(d).valor)} (${Math.round((mayor(d).valor / total(d)) * 100)}% del total).`);
   }
+
+  // Reporte 5 · Pedidos por estado (gráfico de dona) — Abel
+  pedidosPorEstado(): Observable<Reporte> {
+    return this.obtener('pedidos-por-estado', 'Pedidos por estado',
+      { etiquetas: ['Entregado', 'En camino', 'Pendiente', 'Cancelado'], valores: [42, 11, 8, 3] },
+      d => `De ${total(d)} pedidos, el estado más frecuente es "${mayor(d).etiqueta}", con ${mayor(d).valor} pedidos (${Math.round((mayor(d).valor / total(d)) * 100)}% del total).`);
+  }
+
+  // Reporte 6 · Ventas por marca (gráfico de barras) — Abel
+  ventasPorMarca(): Observable<Reporte> {
+    return this.obtener('ventas-por-marca', 'Ventas por marca',
+      { etiquetas: ['Hyundai', 'Kia', 'Mobis'], valores: [15800, 11200, 4600] },
+      d => `La marca con más ventas fue ${mayor(d).etiqueta}, con ${soles(mayor(d).valor)} (${Math.round((mayor(d).valor / total(d)) * 100)}% del total de ${soles(total(d))}).`);
+  }
 }

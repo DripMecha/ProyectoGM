@@ -11,4 +11,17 @@
   </div>
 
   <p class="descripcion"><strong>Resultado:</strong> {{ reporte().descripcion }}</p>
+
+  <div class="descargas">
+    <span>Descargar informe:</span>
+    <button type="button" class="excel" [disabled]="descargando()" (click)="descargar('excel')">
+      {{ descargando() === 'excel' ? '...' : 'Excel' }}
+    </button>
+    <button type="button" class="pdf" [disabled]="descargando()" (click)="descargar('pdf')">
+      {{ descargando() === 'pdf' ? '...' : 'PDF' }}
+    </button>
+    <button type="button" class="word" [disabled]="descargando()" (click)="descargar('word')">
+      {{ descargando() === 'word' ? '...' : 'Word' }}
+    </button>
+  </div>
 </article>

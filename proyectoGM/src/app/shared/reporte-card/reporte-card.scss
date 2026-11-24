@@ -47,3 +47,38 @@ header {
   line-height: 1.6;
   color: $gris;
 }
+
+.descargas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid $borde;
+
+  span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $gris;
+    margin-right: auto;
+  }
+
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 0.9rem;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+  }
+
+  .excel { background: #1c6b3a; }
+  .pdf { background: $rojo; }
+  .word { background: #2e5597; }
+}
