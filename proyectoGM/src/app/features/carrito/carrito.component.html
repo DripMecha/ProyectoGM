@@ -1,0 +1,102 @@
+<app-header />
+
+<main class="carrito-container">
+
+    <div class="encabezado">
+        <a routerLink="/catalogo" class="volver">← Seguir comprando</a>
+        <h1>Mi carrito de compras</h1>
+        <p>Revisa tus productos antes de continuar.</p>
+    </div>
+
+    @if (carritoService.carrito().length === 0) {
+
+    <section class="vacio">
+        <div class="icono">🛒</div>
+        <h2>Tu carrito está vacío</h2>
+        <p>¡Encuentra los repuestos que necesitas!</p>
+        <a routerLink="/catalogo" class="btn-principal">
+            Explorar catálogo
+        </a>
+    </section>
+
+    } @else {
+
+    <div class="contenido">
+
+        <section class="productos">
+            <div class="titulo-lista">
+                <h2>Productos seleccionados</h2>
+                <button class="btn-vaciar" (click)="vaciar()">
+                    Vaciar carrito
+                </button>
+            </div>
+
+            @for (item of carritoService.carrito(); track item.producto.id) {
+            <article class="producto">
+
+                <img [src]="item.producto.imagen || '/image/GenuineMotors_Logo.jpg'" [alt]="item.producto.nombre">
+
+                <div class="info">
+                    <h3>{{ item.producto.nombre }}</h3>
+                    <p>{{ item.producto.marca }}</p>
+                    <strong>
+                        {{ item.producto.precio | currency:'PEN':'symbol':'1.2-2' }}
+                    </strong>
+                </div>
+
+                <div class="cantidad">
+                    <button (click)="disminuir(item.producto.id)">−</button>
+                    <span>{{ item.cantidad }}</span>
+                    <button (click)="aumentar(item.producto.id)">+</button>
+                </div>
+
+                <div class="subtotal-producto">
+                    {{ (item.producto.precio * item.cantidad) | currency:'PEN':'symbol':'1.2-2' }}
+                </div>
+
+                <button class="btn-eliminar" (click)="eliminar(item.producto.id)" aria-label="Eliminar producto">
+                    ✕
+                </button>
+
+            </article>
+            }
+        </section>
+
+        <aside class="resumen">
+            <h2>Resumen de compra</h2>
+
+            <div class="fila">
+                <span>Productos</span>
+                <span>{{ carritoService.cantidadTotal() }}</span>
+            </div>
+
+            <div class="fila">
+                <span>Importe (incluye IGV)</span>
+                <span>{{ carritoService.subtotal() | currency:'PEN':'symbol':'1.2-2' }}</span>
+            </div>
+
+            <div class="fila">
+                <span>IGV incluido</span>
+                <span>{{ carritoService.igv() | currency:'PEN':'symbol':'1.2-2' }}</span>
+            </div>
+
+            <hr>
+
+            <div class="fila total">
+                <strong>Total</strong>
+                <strong>{{ carritoService.total() | currency:'PEN':'symbol':'1.2-2' }}</strong>
+            </div>
+
+            <button class="btn-principal" routerLink="/comprobante">
+                Continuar con la compra
+            </button>
+
+            <p class="nota">Precios expresados en soles (S/).</p>
+        </aside>
+
+    </div>
+    }
+
+</main>
+
+<app-footer />

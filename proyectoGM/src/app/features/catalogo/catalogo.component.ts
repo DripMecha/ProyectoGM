@@ -6,6 +6,8 @@ import { Producto } from '../../core/models/producto';
 import { CatalogoService, Origen } from '../../core/services/catalogo.service';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
+import { CarritoService } from '../../core/services/carrito.service';
+
 
 type Orden = 'relevancia' | 'precio-asc' | 'precio-desc' | 'nombre';
 type Vista = 'cuadricula' | 'lista';
@@ -19,6 +21,8 @@ type Vista = 'cuadricula' | 'lista';
 export class CatalogoComponent implements OnInit {
   private svc = inject(CatalogoService);
   private route = inject(ActivatedRoute);
+  carritoService = inject(CarritoService);
+
 
   // ---------- Estado (signals) ----------
   productos = signal<Producto[]>([]);
@@ -196,4 +200,10 @@ export class CatalogoComponent implements OnInit {
   tieneImagen(p: Producto): boolean {
     return !!p.imagen && !this.fallidas()[p.id];
   }
+
+  agregarAlCarrito(producto: Producto): void {
+    this.carritoService.agregar(producto);
+    alert(`${producto.nombre} se agregó al carrito correctamente.`);
+  }
+
 }
