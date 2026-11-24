@@ -32,9 +32,9 @@ export class ContactosComponent implements OnInit, OnDestroy {
   // Para usar fotos reales: guarda las imágenes en public/image y agrega
   // la propiedad imagen, por ejemplo  imagen: '/image/contacto-1.jpg'
   diapositivas: Diapositiva[] = [
-    { titulo: 'Repuestos genuinos', texto: 'Hyundai y Kia, con la garantía del respaldo original.' },
-    { titulo: 'Atención personalizada', texto: 'Te ayudamos a encontrar el repuesto que tu vehículo necesita.' },
-    { titulo: 'Visítanos', texto: 'Estamos en La Victoria. Te esperamos en nuestra tienda.' },
+    { titulo: 'Repuestos genuinos', texto: 'Hyundai y Kia, con la garantía del respaldo original.', imagen: '/image/hyundaikia.webp' },
+    { titulo: 'Atención personalizada', texto: 'Te ayudamos a encontrar el repuesto que tu vehículo necesita.', imagen: '/image/PartesVehiculos.webp' },
+    { titulo: 'Visítanos', texto: 'Estamos en La Victoria. Te esperamos en nuestra tienda.', imagen: '/image/LogoGM_Presencial.jpg' },
   ];
   actual = signal(0);
   private temporizador?: ReturnType<typeof setInterval>;
