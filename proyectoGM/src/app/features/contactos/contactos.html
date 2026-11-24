@@ -4,8 +4,9 @@
 <!-- 1. Slider -->
 <section class="slider" aria-label="Galería de la tienda">
   @for (d of diapositivas; track d.titulo; let i = $index) {
-    <div class="slide" [class.activa]="i === actual()"
-         [style.background-image]="d.imagen ? 'url(' + d.imagen + ')' : null">
+    <div class="slide" [class.activa]="i === actual()" [class.foto]="!!d.imagen"
+         [style.background-image]="d.imagen ? 'url(' + d.imagen + ')' : null"
+         role="img" [attr.aria-label]="d.titulo">
       <div class="slide-texto">
         <h2>{{ d.titulo }}</h2>
         <p>{{ d.texto }}</p>
